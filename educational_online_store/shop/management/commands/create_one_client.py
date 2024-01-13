@@ -4,13 +4,14 @@ from shop.models import Client, for_phone_number_validation
 
 
 class Command(BaseCommand):
-    help = "Create one fake client"
+    help = "Create one client"
 
     def add_arguments(self, parser):
-        parser.add_argument('name', type=str, help='Name fake client')
-        parser.add_argument('email', type=str, help='Email fake client')
-        parser.add_argument('phone_number', type=str, help='Phone number fake client')
-        parser.add_argument('address', type=str, help='Address fake client')
+
+        parser.add_argument('name', type=str, help='Name client')
+        parser.add_argument('email', type=str, help='Email client')
+        parser.add_argument('phone_number', type=str, help='Phone number client')
+        parser.add_argument('address', type=str, help='Address client')
 
     def handle(self, *args, **kwargs):
 
@@ -25,12 +26,12 @@ class Command(BaseCommand):
             self.stderr.write(str(error))
             return
 
-        one_client = \
-            Client(name=name,
-                   email=email,
-                   phone_number=phone_number,
-                   address=address)
+        client = Client(name=name,
+                        email=email,
+                        phone_number=
+                        phone_number,
+                        address=address)
 
-        self.stdout.write(str(one_client))
+        self.stdout.write(str(client))
 
-        one_client.save()
+        client.save()

@@ -1,11 +1,12 @@
+from shop.models import Client
 from django.core.management.base import BaseCommand
-from shop.models import Client, for_phone_number_validation
 
 
 class Command(BaseCommand):
     help = "Create many fake clients"
 
     def add_arguments(self, parser):
+
         parser.add_argument('quantity', type=int, help='Quantity fake clients')
 
     def handle(self, *args, **kwargs):

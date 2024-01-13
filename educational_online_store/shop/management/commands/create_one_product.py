@@ -4,13 +4,14 @@ from django.core.management.base import BaseCommand
 
 
 class Command(BaseCommand):
-    help = "Create one fake product"
+    help = "Create one product"
 
     def add_arguments(self, parser):
-        parser.add_argument('name', type=str, help='Name fake product')
-        parser.add_argument('description', type=str, help='Description fake product')
-        parser.add_argument('price', type=str, help='Price fake product')
-        parser.add_argument('quantity', type=int, help='Quantity fake product')
+
+        parser.add_argument('name', type=str, help='Name product')
+        parser.add_argument('description', type=str, help='Description product')
+        parser.add_argument('price', type=str, help='Price product')
+        parser.add_argument('quantity', type=int, help='Quantity product')
 
     def handle(self, *args, **kwargs):
 
@@ -20,12 +21,12 @@ class Command(BaseCommand):
         decimal_price: Decimal = Decimal(price)
         quantity: int = kwargs.get('quantity')
 
-        one_product = \
+        product = \
             Product(name=name,
                     description=description,
                     price=decimal_price,
                     quantity=quantity)
 
-        self.stdout.write(str(one_product))
+        self.stdout.write(str(product))
 
-        one_product.save()
+        product.save()

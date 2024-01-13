@@ -55,9 +55,14 @@ class Order(models.Model):
     date_and_time_placing_order = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
+
+        product_count: int = self.product.count()
+        product_list: str = ', '.join(str(product) for product in self.product.all())
+
         return f'Order(' \
                f'client: {self.client}, ' \
-               f'product: {self.product}, ' \
+               f'product count: {product_count}, ' \
+               f'product list: {product_list}, ' \
                f'total amount order: {self.total_amount_order}, ' \
                f'date and time placing order: ' \
                f'{self.date_and_time_placing_order}' \

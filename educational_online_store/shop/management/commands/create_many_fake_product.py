@@ -7,6 +7,7 @@ class Command(BaseCommand):
     help = "Create many fake product"
 
     def add_arguments(self, parser):
+
         parser.add_argument('quantity', type=int, help='Quantity fake products')
 
     def handle(self, *args, **kwargs):
