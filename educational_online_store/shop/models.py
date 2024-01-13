@@ -1,3 +1,65 @@
 from django.db import models
+from django.core.validators import MinValueValidator, RegexValidator
 
-# Create your models here.
+
+for_phone_number_validation = \
+    RegexValidator(
+        regex=r"^[0-9]{3,11}$",
+        message="Номер телефона должен быть в длинну "
+                "от 3 до 11 символов и состоять только из цифр."
+    )
+
+
+class Client(models.Model):
+    name = models.CharField(max_length=100)
+    email = models.EmailField()
+    phone_number = \
+        models.CharField(validators=[for_phone_number_validation],
+                         max_length=11)
+    address = models.TextField()
+    date_and_time_registration = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f'Client(' \
+               f'name: {self.name}, ' \
+               f'email: {self.email}, ' \
+               f'phone number: ' \
+               f'{self.phone_number}, ' \
+               f'address: {self.address}' \
+               f'date and time registration: ' \
+               f'{self.date_and_time_registration}' \
+               f')'
+
+
+class Product(models.Model):
+    name = models.CharField(max_length=100)
+    description = models.TextField()
+    price = models.DecimalField(max_digits=20, decimal_places=10)
+    quantity = models.IntegerField(validators=[MinValueValidator(1)])
+    date_and_time_additions_product = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f'Product(' \
+               f'name: {self.name}, ' \
+               f'price: {self.price}, ' \
+               f'quantity: {self.quantity}, ' \
+               f'date and time additions product: ' \
+               f'{self.date_and_time_additions_product}' \
+               f')'
+
+
+class Order(models.Model):
+    client = models.ForeignKey(Client, on_delete=models.CASCADE)
+    product = models.ManyToManyField(Product)
+    #product = models.ForeignKey(Product, on_delete=models.PROTECT)
+    total_amount_order = models.DecimalField(max_digits=20, decimal_places=10)
+    date_and_time_placing_order = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f'Order(' \
+               f'client: {self.client}, ' \
+               f'product: {self.product}, ' \
+               f'total amount order: {self.total_amount_order}, ' \
+               f'date and time placing order: ' \
+               f'{self.date_and_time_placing_order}' \
+               f')'
