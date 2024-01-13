@@ -14,10 +14,10 @@ class Command(BaseCommand):
 
     def handle(self, *args, **kwargs):
 
-        name = kwargs.get('name')
-        email = kwargs.get('email')
-        phone_number = kwargs.get('phone_number')
-        address = kwargs.get('address')
+        name: str = kwargs.get('name')
+        email: str = kwargs.get('email')
+        phone_number: str = kwargs.get('phone_number')
+        address: str = kwargs.get('address')
 
         try:
             for_phone_number_validation(phone_number)

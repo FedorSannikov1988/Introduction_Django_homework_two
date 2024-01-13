@@ -10,7 +10,7 @@ class Command(BaseCommand):
 
     def handle(self, *args, **kwargs):
 
-        quantity = kwargs.get('quantity')
+        quantity: int = kwargs.get('quantity')
 
         for i in range(quantity):
             one_client = \

@@ -10,7 +10,7 @@ class Command(BaseCommand):
 
     def handle(self, *args, **kwargs):
 
-        pk = kwargs.get('pk')
+        pk: int = kwargs.get('pk')
         client = \
             Client.objects.filter(pk=pk).first()
         if client:

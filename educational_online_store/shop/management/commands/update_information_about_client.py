@@ -13,11 +13,11 @@ class Command(BaseCommand):
         parser.add_argument('address', type=str, help='Address fake client')
 
     def handle(self, *args, **kwargs):
-        pk = kwargs.get('pk')
-        name = kwargs.get('name')
-        email = kwargs.get('email')
-        phone_number = kwargs.get('phone_number')
-        address = kwargs.get('address')
+        pk: int = kwargs.get('pk')
+        name: str = kwargs.get('name')
+        email: str = kwargs.get('email')
+        phone_number: str = kwargs.get('phone_number')
+        address: str = kwargs.get('address')
 
         client = \
             Client.objects.filter(pk=pk).first()
