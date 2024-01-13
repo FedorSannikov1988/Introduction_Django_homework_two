@@ -25,7 +25,7 @@ class Client(models.Model):
                f'email: {self.email}, ' \
                f'phone number: ' \
                f'{self.phone_number}, ' \
-               f'address: {self.address}' \
+               f'address: {self.address}, ' \
                f'date and time registration: ' \
                f'{self.date_and_time_registration}' \
                f')'
@@ -51,7 +51,6 @@ class Product(models.Model):
 class Order(models.Model):
     client = models.ForeignKey(Client, on_delete=models.CASCADE)
     product = models.ManyToManyField(Product)
-    #product = models.ForeignKey(Product, on_delete=models.PROTECT)
     total_amount_order = models.DecimalField(max_digits=20, decimal_places=10)
     date_and_time_placing_order = models.DateTimeField(auto_now_add=True)
 
