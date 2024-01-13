@@ -6,6 +6,7 @@ class Command(BaseCommand):
     help = "Read product by id"
 
     def add_arguments(self, parser):
+
         parser.add_argument('pk', type=int, help='ID product')
 
     def handle(self, *args, **kwargs):
